@@ -1,0 +1,17 @@
+Package: BA23229018
+Type: Package
+Title: Final project for 'Statistical Computing' course 2023Aut
+Version: 1.0
+Date: 2023-12-08
+Author: Yuanhao Pu
+Maintainer: Yuanhao Pu <puyuanhao@mail.ustc.edu.com>
+Description: Several R and Rcpp function concerning Deep Learning are included in this package for illustration. 
+License: GPL (>= 2)
+Imports: Rcpp, DAAG, MASS, boot, bootstrap, coda, knitr, microbenchmark, stats4
+Suggests: rmarkdown
+LinkingTo: Rcpp
+RoxygenNote: 7.2.3
+Encoding: UTF-8
+VignetteBuilder: knitr
+URL: http://github.com/yuanhao53/BA23229018
+BugReports: http://github.com/yuanhao53/BA23229018/issues
