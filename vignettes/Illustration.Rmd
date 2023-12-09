@@ -11,7 +11,47 @@ vignette: >
 
 To TA:
 
-Considering that my current research focus is mainly on artificial intelligence algorithms based on deep learning, I have had limited opportunities to use R as my coding language. Initially, I intended to implement the whole definition for neural networks and the training process for deep models (like CNN, VAE, etc.) from scratch in R. Unfortunately, the lack of comprehensive support for `class` in Rcpp within R packages resulted in significant time investment without a viable solution. Consequently, due to time constraints, I had to start afresh, ultimately implementing optimization algorithms only for simple linear models. I apologize for not achieving a very satisfying project, and I would appreciate if you understand the challenges and efforts I encountered in this regard.
+Considering that my current research focus is mainly on artificial intelligence algorithms based on deep learning, I have had limited opportunities to use R as my coding language. Initially, I intended to implement the whole definition for neural networks and the training process for deep models (like CNN, VAE, etc.) from scratch in R. Unfortunately, the lack of comprehensive support for `class` in Rcpp within R packages resulted in significant time investment without a viable solution. Consequently, due to time constraints, I had to start afresh, ultimately implementing a BP algorithm for MLP model in `R` and several optimization algorithms only for simple linear models in `Rcpp`. I apologize for not achieving a very satisfying project, and I would appreciate if you understand the challenges and efforts I encountered in this regard.
+
+## BackPropagation (BP)
+
+My package contains a whole training process of a basic Neural Network, including the Backpropagation (BP) algorithm for a simple Multi-Layer Perceptron (MLP) model.
+
+### Parameters
+
+`X`: the feature dataset.
+
+`y`: the target label.
+
+`hidden_size`: the width of hidden layer
+
+`lr`: learning rate
+
+`epochs`: number of epochs to be trained
+
+`lambda`: regularization coefficient
+
+### Usage Example
+
+```{r, eval = FALSE}
+train_inputs <- matrix(c(0, 0, 0, 1, 1, 0, 1, 1), ncol = 2, byrow = TRUE)
+train_targets <- c(0, 1, 1, 0)
+mlp_train(train_inputs, train_targets, hidden_size = 4, lr = 0.1, epochs = 1000, lambda = 0.01)
+```
+
+### Algorithm Flow
+
+1.  **Initialization of Weights and Biases:** Random initialization of weights and biases from the input layer to the hidden layer (**`weights_input_hidden`**, **`biases_hidden`**), and from the hidden layer to the output layer (**`weights_hidden_output`**, **`biases_output`**).
+
+2.  **Forward Propagation:** For each input sample, perform forward propagation to compute the outputs of the hidden layer and the output layer.
+
+3.  **Loss Calculation:** Utilize Mean Squared Error (MSE) as the loss function to compute the error between predicted output and actual labels.
+
+4.  **Backward Propagation (BP):** Update weights and biases based on the computed gradients, aiming to minimize the loss.
+
+5.  **Iterative Training:** Repeat the above steps for a specified number of training epochs.
+
+6.  **Loss Graph Plotting:** Record the loss at each epoch and plot the variation of loss over time.
 
 ## Gradient Descent (GD)
 
@@ -36,12 +76,6 @@ F(x_0)\geq F(x_1)\geq F(x_2)\geq \cdots
 $$
 
 so, hopefully, the sequence $(x_n)$ converges to the desired local minimum. Note that the value of the **step size** $\gamma$ is allowed to change at every iteration.
-
-### Function Signature
-
-```{r, eval = FALSE}
-gradient_descent(X, y, lr, num_iters)
-```
 
 ### Parameters
 
